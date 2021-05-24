@@ -86,34 +86,34 @@ class UserController extends Controller
         ], 201);
     }
 
-    protected function verify(Request $request)
-    {
-        $data = $request->validate([
-            'verification_code' => ['required', 'numeric'],
-            'mobile_number' => ['required', 'string'],
-        ]);
-        /* Get credentials from .env */
-        $token = env("TWILIO_AUTH_TOKEN", 'AC4c2f8d4c005da102a31f0830514e6520');
-        $twilio_sid = env("TWILIO_SID", '3ddded5387db76639323c0bd3ab93cd6');
-        $twilio_verify_sid = env("TWILIO_VERIFY_SID", 'VAc0fdea2f1cf2103fa33760a30cf71445');
-        $twilio = new Client($twilio_sid, $token);
-        $verification = $twilio->verify->v2->services($twilio_verify_sid)
-            ->verificationChecks
-            ->create($data['verification_code'], array('to' => $data['mobile_number']));
-        if ($verification->valid) {
-            $user = tap(User::where('mobile_number', $data['mobile_number']))->update(['isVerified' => true]);
-            /* Authenticate user */
-            return response()->json([
-                'status' => true,
-                'message' => 'User mobile_number verified',
-                'user' => $user
-            ], 201);
-        }
-        return response()->json([
-            'status' => false,
-            'message' => 'User mobile_number not verified',
-        ]);
-    }
+//    protected function verify(Request $request)
+//    {
+//        $data = $request->validate([
+//            'verification_code' => ['required', 'numeric'],
+//            'mobile_number' => ['required', 'string'],
+//        ]);
+//        /* Get credentials from .env */
+//        $token = env("TWILIO_AUTH_TOKEN", 'AC4c2f8d4c005da102a31f0830514e6520');
+//        $twilio_sid = env("TWILIO_SID", '3ddded5387db76639323c0bd3ab93cd6');
+//        $twilio_verify_sid = env("TWILIO_VERIFY_SID", 'VAc0fdea2f1cf2103fa33760a30cf71445');
+//        $twilio = new Client($twilio_sid, $token);
+//        $verification = $twilio->verify->v2->services($twilio_verify_sid)
+//            ->verificationChecks
+//            ->create($data['verification_code'], array('to' => $data['mobile_number']));
+//        if ($verification->valid) {
+//            $user = tap(User::where('mobile_number', $data['mobile_number']))->update(['isVerified' => true]);
+//            /* Authenticate user */
+//            return response()->json([
+//                'status' => true,
+//                'message' => 'User mobile_number verified',
+//                'user' => $user
+//            ], 201);
+//        }
+//        return response()->json([
+//            'status' => false,
+//            'message' => 'User mobile_number not verified',
+//        ]);
+//    }
 
 
     /**

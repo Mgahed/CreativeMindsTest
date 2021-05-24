@@ -12,7 +12,6 @@
         "laravel/framework": "^8.40",
         "laravel/tinker": "^2.5",
         "nexmo/laravel": "^2.4",
-        "twilio/sdk": "^6.24",
         "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
