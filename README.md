@@ -13,4 +13,5 @@ in the site so, I used  NEXMO.
 * You can find .env here so, you can take DB name from it.
 * run `npm install` to get node_modules.
 * run `composer install` to install all packages
+* You can find postman collectoin here `https://www.postman.com/collections/f1fbfc18d82141494e34`
 
